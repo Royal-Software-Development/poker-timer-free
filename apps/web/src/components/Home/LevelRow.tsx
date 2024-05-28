@@ -4,8 +4,8 @@ import LevelInput from "./LevelInput";
 import RemoveLevel from "./RemoveLevel";
 import StartLevel from "./StartLevel";
 import DisplayId from "./DisplayId";
-import { useSetAtom } from "jotai";
-import { timeAtom, tournamentAtom } from "../../lib/atoms";
+import { useAtomValue, useSetAtom } from "jotai";
+import { levelAtom, timeAtom, tournamentAtom } from "../../lib/atoms";
 import { Tournament } from "../../types/structure";
 
 type LevelRowProps = {
@@ -16,6 +16,7 @@ type LevelRowProps = {
 const LevelRow = ({ blind, index }: LevelRowProps) => {
   const setTournament = useSetAtom(tournamentAtom);
   const setTime = useSetAtom(timeAtom);
+  const level = useAtomValue(levelAtom);
 
   const handleChange = useCallback(
     (fieldName: keyof Blinds) => (newValue: number) => {
@@ -29,7 +30,7 @@ const LevelRow = ({ blind, index }: LevelRowProps) => {
         return updatedTournament;
       });
     },
-    [index, setTournament]
+    [index, setTournament],
   );
 
   return (
@@ -53,7 +54,9 @@ const LevelRow = ({ blind, index }: LevelRowProps) => {
           value={blind.time}
           onChange={(newTime) => {
             handleChange("time")(newTime);
-            setTime({ minutes: newTime || 0, seconds: 0 });
+            if (level === index) {
+              setTime({ minutes: newTime || 0, seconds: 0 });
+            }
           }}
         />
       </td>
