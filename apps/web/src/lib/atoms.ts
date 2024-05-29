@@ -2,6 +2,8 @@ import { atom } from "jotai";
 import { Tournament } from "../types/structure";
 import { tournaments } from "../db/tournamentsData";
 import atomWithBroadcast from "./atomWithBroadcast";
+import { createSpeechEngine } from "../hooks/speech";
+import { getCorrectLevelIndex } from "./data";
 
 // State tournament
 export const tournamentAtom = atomWithBroadcast<Tournament>(
@@ -89,6 +91,20 @@ export const tickTimeAtom = atom(null, (get, set) => {
 
   if (newTime.minutes === 0 && newTime.seconds === 0 && nextBlind) {
     set(levelAtom, level + 1);
+    const { load, play } = createSpeechEngine({
+      onBoundary: () => null,
+      onEnd: () => null,
+      onStateUpdate: () => null,
+    });
+    const speechMessage = (() => {
+      if (nextBlind.break) {
+        return "Iniciando Break";
+      }
+      const correctedIndex = getCorrectLevelIndex(tournament.blinds, level + 1);
+      return `Iniciando level ${correctedIndex}`;
+    })();
+    load(speechMessage);
+    play();
     return;
   }
 

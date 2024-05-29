@@ -10,8 +10,16 @@ const useAddTournamentLevel = () => {
   const addLevel = useCallback(
     (breakLevel = false) => {
       setTournament((prevTournament: Tournament) => {
-        const lastLevel =
-          prevTournament.blinds[prevTournament.blinds.length - 1];
+        const fallbackLevel = {
+          small: 50,
+          big: 100,
+          time: 15,
+          break: false,
+        };
+        const onlyLevels = prevTournament.blinds.filter(
+          (blind) => !blind.break,
+        );
+        const lastLevel = onlyLevels?.at(-1) || fallbackLevel;
         const newLevel: Blinds = breakLevel
           ? { small: 0, big: 0, time: 15, break: true }
           : { ...lastLevel, break: false };
@@ -20,7 +28,7 @@ const useAddTournamentLevel = () => {
         return { ...prevTournament, blinds: updatedBlinds };
       });
     },
-    [setTournament]
+    [setTournament],
   );
 
   return addLevel;

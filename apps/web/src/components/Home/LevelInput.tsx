@@ -1,12 +1,16 @@
 import { ChangeEvent, useCallback } from "react";
 import { ensureNonNegativeValue } from "@poker-time/utils/number";
+import { useSpeech } from "../../hooks/useSpeech";
 
 type LevelInputProps = {
   value: number | undefined;
   onChange: (value: number) => void;
+  speechMessage: string;
 };
 
-const LevelInput = ({ value, onChange }: LevelInputProps) => {
+const LevelInput = ({ value, onChange, speechMessage }: LevelInputProps) => {
+  const { playSpeech } = useSpeech([speechMessage]);
+
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       onChange(ensureNonNegativeValue(e.target.value));
@@ -17,10 +21,11 @@ const LevelInput = ({ value, onChange }: LevelInputProps) => {
   return (
     <div className="flex justify-center">
       <input
-        className="bg-transparent text-center w-full text-xs sm:text-base"
+        className="w-full bg-transparent text-center text-xs sm:text-base"
         type="number"
         value={value || ""}
         onChange={handleChange}
+        onBlur={playSpeech}
       />
     </div>
   );

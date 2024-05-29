@@ -1,6 +1,7 @@
 import { useAtomValue } from "jotai";
-import { tournamentAtom } from "../../lib/atoms";
+import { blindsReadOnlyAtom } from "../../lib/atoms";
 import { Blinds } from "../../types/blinds";
+import { getCorrectLevelIndex } from "../../lib/data";
 
 interface Props {
   blind: Blinds;
@@ -8,12 +9,8 @@ interface Props {
 }
 
 const DisplayId = ({ blind, index }: Props) => {
-  const tournament = useAtomValue(tournamentAtom);
-
-  const levelsUntilIndex = tournament.blinds.slice(0, index);
-  const breaksUntilIndex = levelsUntilIndex.filter((blind) => blind.break);
-  const qtyOfBreaksUntilIndex = breaksUntilIndex.length;
-  const correctedIndex = index - qtyOfBreaksUntilIndex + 1;
+  const blinds = useAtomValue(blindsReadOnlyAtom);
+  const correctedIndex = getCorrectLevelIndex(blinds, index);
 
   return (
     <div className="flex justify-center text-xs sm:text-base">

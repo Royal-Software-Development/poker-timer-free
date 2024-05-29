@@ -3,13 +3,16 @@ import { tournamentAtom } from "../../lib/atoms";
 import { Tournament } from "../../types/structure";
 import { useCallback } from "react";
 import { X } from "lucide-react";
+import { useSpeech } from "../../hooks/useSpeech";
 
 interface Props {
   index: number;
+  speechMessage: string;
 }
 
-const RemoveLevel = ({ index }: Props) => {
+const RemoveLevel = ({ index, speechMessage }: Props) => {
   const setTournament = useSetAtom(tournamentAtom);
+  const { playSpeech } = useSpeech([speechMessage]);
 
   const removeLevel = useCallback(() => {
     setTournament((prevTournament: Tournament) => {
@@ -18,7 +21,8 @@ const RemoveLevel = ({ index }: Props) => {
       const updatedTournament = { ...prevTournament, blinds: updatedBlinds };
       return updatedTournament;
     });
-  }, [index, setTournament]);
+    playSpeech();
+  }, [index, playSpeech, setTournament]);
 
   return (
     <button onClick={removeLevel} title={"Remove"}>

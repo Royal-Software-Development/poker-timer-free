@@ -1,11 +1,24 @@
-import { useAtom } from "jotai";
+import { useAtomValue } from "jotai";
 
-import { levelAtom } from "../../lib/atoms";
+import {
+  blindsReadOnlyAtom,
+  currentBlindReadOnlyAtom,
+  levelAtom,
+} from "../../lib/atoms";
+import { getCorrectLevelIndex } from "../../lib/data";
 
 const LevelDisplay = () => {
-  const [level] = useAtom<number>(levelAtom);
+  const level = useAtomValue(levelAtom);
+  const blinds = useAtomValue(blindsReadOnlyAtom);
+  const currentBlind = useAtomValue(currentBlindReadOnlyAtom);
+  const correctedIndex = getCorrectLevelIndex(blinds, level);
+  const isBreak = currentBlind.break;
 
-  return <p className="text-sm sm:text-base">{`Level ${level + 1}`}</p>;
+  return (
+    <p className="text-sm sm:text-base">
+      {isBreak ? "BREAK" : `Level ${correctedIndex}`}
+    </p>
+  );
 };
 
 export default LevelDisplay;

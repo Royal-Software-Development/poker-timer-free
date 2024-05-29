@@ -1,15 +1,22 @@
 import { Ban } from "lucide-react";
 
 import useAddTournamentLevel from "../../hooks/useAddTournamentLevel";
+import { useSpeech } from "../../hooks/useSpeech";
 
-const AddLevelButton = () => {
+const AddBreakButton = () => {
   const addLevel = useAddTournamentLevel();
+  const { playSpeech } = useSpeech(["Adicionado novo break"]);
+
+  const onClick = () => {
+    addLevel(true);
+    playSpeech();
+  };
 
   return (
-    <button onClick={() => addLevel(true)} title="Add a new break.">
+    <button onClick={onClick} title="Add a new break.">
       <Ban />
     </button>
   );
 };
 
-export default AddLevelButton;
+export default AddBreakButton;
