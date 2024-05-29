@@ -6,11 +6,9 @@ const Counter = () => {
   const time = useAtomValue(timeAtom);
 
   return (
-    <main className="mx-auto flex max-w-6xl justify-center w-full">
-      <div className="text-[8rem] md:text-[16rem] font-bold">
-        {formatTimer(time)}
-      </div>
-    </main>
+    <h3 className="md:text-10xl leading-negative-1 my-auto w-fit self-center border-b text-center text-9xl font-bold tabular-nums">
+      {formatTimer(time)}
+    </h3>
   );
 };
 

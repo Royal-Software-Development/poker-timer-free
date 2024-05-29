@@ -1,26 +1,18 @@
 import { useAtomValue } from "jotai";
-import { currentBlindReadOnlyAtom, levelAtom } from "../../lib/atoms";
+import { tournamentTitleReadOnlyAtom } from "../../lib/atoms";
 import Logo from "./Logo";
-
-const LEVEL_PREFIX = "LEVEL";
+import StepCard from "./StepCard";
 
 const TimerHeaderContent = () => {
-  const level = useAtomValue(levelAtom);
-  const currentBlind = useAtomValue(currentBlindReadOnlyAtom);
+  const tournamentTitle = useAtomValue(tournamentTitleReadOnlyAtom);
 
   return (
     <nav className="flex items-center justify-between">
       <Logo />
-      <h1 className="font-monument text-3xl leading-10 text-white">
-        Tournament name
+      <h1 className="font-montserrat text-3xl leading-10 text-white">
+        {tournamentTitle}
       </h1>
-      <section>
-        {currentBlind.break ? (
-          <p>{`BREAK`}</p>
-        ) : (
-          <p>{`${LEVEL_PREFIX} ${level + 1}`}</p>
-        )}
-      </section>
+      <StepCard />
     </nav>
   );
 };

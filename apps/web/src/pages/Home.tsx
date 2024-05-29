@@ -4,7 +4,7 @@ import TimerHandling from "../components/Home/TimerHandling";
 
 const Home = () => {
   return (
-    <div className="flex flex-col space-y-6 bg-gray-900">
+    <div className="flex flex-col space-y-6">
       <Header />
       <StructureManager />
       <TimerHandling />

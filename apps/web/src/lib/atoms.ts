@@ -6,8 +6,14 @@ import atomWithBroadcast from "./atomWithBroadcast";
 // State tournament
 export const tournamentAtom = atomWithBroadcast<Tournament>(
   "tournament",
-  tournaments[0]
+  tournaments[0],
 );
+
+// Derived state
+export const tournamentTitleReadOnlyAtom = atom((get) => {
+  const tournament = get(tournamentAtom);
+  return tournament.title;
+});
 
 // State level
 const defaultLevelAtom = atom<number>(0);
@@ -23,7 +29,7 @@ export const levelAtom = atom<number, [number], void>(
     };
     set(overwrittenLevelAtom, level);
     set(timeAtom, newTime);
-  }
+  },
 );
 
 // State isPlaying
@@ -62,7 +68,7 @@ const defaultTimeAtom = atom<Time>((get) => ({
 const overwrittenTimeAtom = atomWithBroadcast<Time | null>("time", null);
 export const timeAtom = atom<Time, [Time], void>(
   (get) => get(overwrittenTimeAtom) || get(defaultTimeAtom),
-  (_get, set, time: Time) => set(overwrittenTimeAtom, time)
+  (_get, set, time: Time) => set(overwrittenTimeAtom, time),
 );
 
 export const tickTimeAtom = atom(null, (get, set) => {
