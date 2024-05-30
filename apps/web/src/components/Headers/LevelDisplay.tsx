@@ -15,9 +15,11 @@ const LevelDisplay = () => {
   const isBreak = currentBlind.break;
 
   return (
-    <p className="text-sm sm:text-base">
-      {isBreak ? "BREAK" : `Level ${correctedIndex}`}
-    </p>
+    <div className="w-28 rounded-xl bg-neutral-900 px-3 py-2">
+      <p className="text-center text-sm uppercase sm:text-base">
+        {isBreak ? "BREAK" : `lvl ${correctedIndex}`}
+      </p>
+    </div>
   );
 };
 

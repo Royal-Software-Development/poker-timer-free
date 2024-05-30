@@ -5,6 +5,10 @@ import atomWithBroadcast from "./atomWithBroadcast";
 import { createSpeechEngine } from "../hooks/speech";
 import { getCorrectLevelIndex } from "./data";
 
+// State tab
+export type HeaderTab = "game" | "data";
+export const tabAtom = atomWithBroadcast<HeaderTab>("headerTab", "game");
+
 // State tournament
 export const tournamentAtom = atomWithBroadcast<Tournament>(
   "tournament",

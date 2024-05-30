@@ -10,12 +10,17 @@ interface Props {
 
 const DisplayId = ({ blind, index }: Props) => {
   const blinds = useAtomValue(blindsReadOnlyAtom);
+
   const correctedIndex = getCorrectLevelIndex(blinds, index);
+  const isBreak = blind.break;
+  const className = isBreak ? "bg-yellow-400" : "bg-neutral-900";
 
   return (
-    <div className="flex justify-center text-xs sm:text-base">
-      {blind.break ? "BREAK" : correctedIndex}
-    </div>
+    <p
+      className={`flex w-28 justify-center rounded-lg px-5 py-3 text-xs uppercase text-white md:text-base ${className}`}
+    >
+      {isBreak ? "Break" : `Lvl ${correctedIndex}`}
+    </p>
   );
 };
 

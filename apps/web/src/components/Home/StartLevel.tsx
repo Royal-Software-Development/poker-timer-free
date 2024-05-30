@@ -1,5 +1,5 @@
 import { useSetAtom } from "jotai";
-import { SkipForward } from "lucide-react";
+import { ChevronLast } from "lucide-react";
 import { useCallback } from "react";
 import { levelAtom } from "../../lib/atoms";
 import { useSpeech } from "../../hooks/useSpeech";
@@ -19,8 +19,12 @@ const StartLevel = ({ index, speechMessage }: Props) => {
   }, [index, playSpeech, setLevel]);
 
   return (
-    <button onClick={startLevel} title={`Start level ${index + 1}`}>
-      <SkipForward />
+    <button
+      onClick={startLevel}
+      title={`Start level ${index + 1}`}
+      className="flex size-10 items-center justify-center rounded-lg border border-white text-blue-500"
+    >
+      <ChevronLast />
     </button>
   );
 };

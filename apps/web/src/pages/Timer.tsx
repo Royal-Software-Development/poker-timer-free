@@ -5,7 +5,7 @@ import ProgressBar from "../components/Timer/ProgressBar";
 
 const Timer = () => {
   return (
-    <div className="flex h-screen flex-col justify-between pb-6">
+    <div className="flex h-screen flex-col justify-between gap-4 pb-6">
       <Header />
       <Counter />
       <div className="flex flex-col gap-10">

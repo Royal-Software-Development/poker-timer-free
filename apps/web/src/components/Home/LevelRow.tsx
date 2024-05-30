@@ -13,6 +13,7 @@ import {
 } from "../../lib/atoms";
 import { Tournament } from "../../types/structure";
 import { getCorrectLevelIndex } from "../../lib/data";
+import NumberControl from "./NumberControl";
 
 type LevelRowProps = {
   blind: Blinds;
@@ -72,30 +73,30 @@ const LevelRow = ({ blind, index }: LevelRowProps) => {
   })();
 
   return (
-    <tr>
-      <td className="px-4 py-2 ">
+    <li
+      className={`w-full rounded-xl bg-neutral-800 px-24 py-7 ${isRowOfCurrentLevel && "shadow shadow-green-500"}`}
+    >
+      <div className="flex items-center justify-between gap-7 border-b border-white pb-2">
         <DisplayId blind={blind} index={index} />
-      </td>
-      <td className="px-4 py-2">
-        <LevelInput
-          value={blind.small}
-          onChange={handleChange("small")}
-          speechMessage={speechMessageSmall}
-        />
-      </td>
-      <td className="px-4 py-2">
-        <LevelInput
-          value={blind.big}
-          onChange={handleChange("big")}
-          speechMessage={speechMessageBig}
-        />
-      </td>
-      <td className="px-4 py-2">
-        <div className="flex justify-center text-xs sm:text-base">
-          {blind.big}
-        </div>
-      </td>
-      <td className="px-4 py-2">
+        {!isBreak && (
+          <>
+            <NumberControl
+              value={blind.small}
+              onChange={handleChange("small")}
+              speechMessage={speechMessageSmall}
+            />
+            <NumberControl
+              value={blind.big}
+              onChange={handleChange("big")}
+              speechMessage={speechMessageBig}
+            />
+            <NumberControl
+              value={blind.big}
+              onChange={handleChange("big")}
+              speechMessage={speechMessageBig}
+            />
+          </>
+        )}
         <LevelInput
           value={blind.time}
           onChange={(newTime) => {
@@ -106,18 +107,12 @@ const LevelRow = ({ blind, index }: LevelRowProps) => {
           }}
           speechMessage={speechMessageTime}
         />
-      </td>
-      <td className="px-4 py-2">
-        <div className="flex justify-center">
+        <div className="flex items-center gap-5">
           <StartLevel index={index} speechMessage={speechMessageStart} />
-        </div>
-      </td>
-      <td className="px-4 py-2">
-        <div className="flex justify-center">
           <RemoveLevel index={index} speechMessage={speechMessageRemove} />
         </div>
-      </td>
-    </tr>
+      </div>
+    </li>
   );
 };
 

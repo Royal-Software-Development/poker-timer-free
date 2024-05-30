@@ -2,7 +2,7 @@ import { useSetAtom } from "jotai";
 import { tournamentAtom } from "../../lib/atoms";
 import { Tournament } from "../../types/structure";
 import { useCallback } from "react";
-import { X } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import { useSpeech } from "../../hooks/useSpeech";
 
 interface Props {
@@ -25,8 +25,12 @@ const RemoveLevel = ({ index, speechMessage }: Props) => {
   }, [index, playSpeech, setTournament]);
 
   return (
-    <button onClick={removeLevel} title={"Remove"}>
-      <X />
+    <button
+      onClick={removeLevel}
+      title={"Remove"}
+      className="flex size-10 items-center justify-center rounded-lg border border-white text-red-500"
+    >
+      <Trash2 />
     </button>
   );
 };

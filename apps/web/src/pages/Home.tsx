@@ -1,12 +1,16 @@
+import { useAtomValue } from "jotai";
 import Header from "../components/Headers/Header";
-import StructureManager from "../components/Home/StructureManager";
 import TimerHandling from "../components/Home/TimerHandling";
+import { tabAtom } from "../lib/atoms";
+import GameInfo from "../components/Home/GameInfo";
+import DataInfo from "../components/Home/DataInfo";
 
 const Home = () => {
+  const tab = useAtomValue(tabAtom);
   return (
     <div className="flex flex-col space-y-6">
       <Header />
-      <StructureManager />
+      {tab === "game" ? <GameInfo /> : <DataInfo />}
       <TimerHandling />
     </div>
   );
