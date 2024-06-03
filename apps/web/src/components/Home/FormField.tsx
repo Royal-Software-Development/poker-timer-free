@@ -1,5 +1,6 @@
 import { FieldProps } from "../../types/field"
 import CounterField from "./CounterField"
+import ChipsField from "./ValueAndChipsField"
 import ValueField from "./ValueField"
 
 const FormField = ({ variant, ...props }: FieldProps) => {
@@ -8,6 +9,8 @@ const FormField = ({ variant, ...props }: FieldProps) => {
       return <ValueField {...props} />
     case "counter":
       return <CounterField {...props} />
+    case "chips":
+      return <ChipsField {...props} />
     default:
       return null
   }
