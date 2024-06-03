@@ -1,9 +1,9 @@
-import { FieldProps } from "../../types/field"
+import { FormFieldProps } from "../../types/field"
 import CounterField from "./CounterField"
-import ChipsField from "./ValueAndChipsField"
+import ChipsField from "./ChipsField"
 import ValueField from "./ValueField"
 
-const FormField = ({ variant, ...props }: FieldProps) => {
+const FormField = ({ variant, ...props }: FormFieldProps) => {
   switch (variant) {
     case "value":
       return <ValueField {...props} />

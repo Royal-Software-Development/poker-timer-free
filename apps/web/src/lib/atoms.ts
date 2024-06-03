@@ -114,3 +114,47 @@ export const tickTimeAtom = atom(null, (get, set) => {
 
   set(timeAtom, newTime);
 });
+
+// States of actions
+
+// Value of each action
+export const valueOfBuyIn = atomWithBroadcast<number>("buyin-value", 0);
+export const valueOfDoubleBuyIn = atomWithBroadcast<number>("double-buyin-value", 0);
+export const valueOfRebuy = atomWithBroadcast<number>("rebuy-value", 0);
+export const valueOfDoubleRebuy = atomWithBroadcast<number>("double-rebuy-value", 0);
+export const valueOfAddon = atomWithBroadcast<number>("addon-value", 0);
+export const valueOfChipTime = atomWithBroadcast<number>("chip-time-value", 1);
+
+// Chips amount of each action
+export const chipsOfBuyIn = atomWithBroadcast<number>("buyin-chips", 0);
+export const chipsOfDoubleBuyIn = atomWithBroadcast<number>("double-buyin-chips", 0);
+export const chipsOfRebuy = atomWithBroadcast<number>("rebuy-chips", 0);
+export const chipsOfDoubleRebuy = atomWithBroadcast<number>("double-rebuy-chips", 0);
+export const chipsOfAddon = atomWithBroadcast<number>("addon-chips", 0);
+export const chipsOfChipTime = atomWithBroadcast<number>("chip-time-chips", 0);
+
+// Counter of each action
+export const counterOfBuyIn = atomWithBroadcast<number>("buyin-counter", 0);
+export const counterOfDoubleBuyIn = atomWithBroadcast<number>("double-buyin-counter", 0);
+export const counterOfRebuy = atomWithBroadcast<number>("rebuy-counter", 0);
+export const counterOfDoubleRebuy = atomWithBroadcast<number>("double-rebuy-counter", 0);
+export const counterOfAddon = atomWithBroadcast<number>("addon-counter", 0);
+export const counterOfChipTime = atomWithBroadcast<number>("chip-time-counter", 0);
+
+export const currentChipCountReadOnlyAtom = atom((get) => {
+  const buyInCount = get(counterOfBuyIn);
+  const doubleBuyInCount = get(counterOfDoubleBuyIn);
+  const chipTimeCount = get(counterOfChipTime);
+  const rebuyCount = get(counterOfRebuy);
+  const doubleRebuyCount = get(counterOfDoubleRebuy);
+  const addOnCount = get(counterOfAddon);
+
+  const buyInChips = get(chipsOfBuyIn);
+  const doubleBuyInChips = get(chipsOfDoubleBuyIn);
+  const chipTimeChips = get(chipsOfChipTime);
+  const rebuyChips = get(chipsOfRebuy);
+  const doubleRebuyChips = get(chipsOfDoubleRebuy);
+  const addOnChips = get(chipsOfAddon);
+
+  return ((buyInCount * buyInChips) + (doubleBuyInCount * doubleBuyInChips) + (chipTimeCount * chipTimeChips) + (rebuyCount * rebuyChips) + (doubleRebuyCount * doubleRebuyChips) + (addOnCount * addOnChips)) / 1000;
+});
