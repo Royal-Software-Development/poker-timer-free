@@ -141,6 +141,7 @@ export const counterOfDoubleRebuy = atomWithBroadcast<number>("double-rebuy-coun
 export const counterOfAddon = atomWithBroadcast<number>("addon-counter", 0);
 export const counterOfChipTime = atomWithBroadcast<number>("chip-time-counter", 0);
 
+// Chip Count derived state
 export const currentChipCountReadOnlyAtom = atom((get) => {
   const buyInCount = get(counterOfBuyIn);
   const doubleBuyInCount = get(counterOfDoubleBuyIn);
@@ -158,3 +159,30 @@ export const currentChipCountReadOnlyAtom = atom((get) => {
 
   return ((buyInCount * buyInChips) + (doubleBuyInCount * doubleBuyInChips) + (chipTimeCount * chipTimeChips) + (rebuyCount * rebuyChips) + (doubleRebuyCount * doubleRebuyChips) + (addOnCount * addOnChips)) / 1000;
 });
+
+// Players State
+export const totalPlayersCounter = atomWithBroadcast<number>("total-players", 0);
+export const eliminationsCounter = atomWithBroadcast<number>("eliminations", 0);
+
+// Derived State Players State
+export const playersInReadOnlyAtom = atom((get) => {
+  const total = get(totalPlayersCounter)
+  const eliminations = get(eliminationsCounter)
+
+  if (eliminations === 0) {
+    return total
+  }
+
+  if (eliminations >= total) {
+    return 0
+  }
+
+  if (eliminations < total) {
+    return total - eliminations
+  }
+})
+
+
+
+
+

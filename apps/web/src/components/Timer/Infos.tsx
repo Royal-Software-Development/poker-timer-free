@@ -1,5 +1,5 @@
 import { useAtomValue } from "jotai";
-import { blindsReadOnlyAtom, counterOfAddon, counterOfBuyIn, counterOfChipTime, counterOfDoubleBuyIn, counterOfDoubleRebuy, counterOfRebuy, currentChipCountReadOnlyAtom, levelAtom } from "../../lib/atoms";
+import { blindsReadOnlyAtom, counterOfAddon, counterOfBuyIn, counterOfChipTime, counterOfDoubleBuyIn, counterOfDoubleRebuy, counterOfRebuy, currentChipCountReadOnlyAtom, levelAtom, playersInReadOnlyAtom, totalPlayersCounter } from "../../lib/atoms";
 import ContentCard from "@poker-time/ui/contentCard";
 
 interface Props {
@@ -42,6 +42,9 @@ const Infos = () => {
   const addOnCount = useAtomValue(counterOfAddon)
   const chipTimeCount = useAtomValue(counterOfChipTime)
 
+  const totalPlayers = useAtomValue(totalPlayersCounter)
+  const playersIn = useAtomValue(playersInReadOnlyAtom)
+
   const currentBlinds = blinds[level];
   const nextBlinds = blinds[level + 1];
 
@@ -76,9 +79,9 @@ const Infos = () => {
             <CardTitle size="small">Players</CardTitle>
             <hr className="w-full" />
             <div className="align-center flex justify-center gap-4">
-              <CardText size="small">9</CardText>
+              <CardText size="small">{playersIn}</CardText>
               <hr className="h-full w-px bg-white" />
-              <CardText size="small">40</CardText>
+              <CardText size="small">{totalPlayers}</CardText>
             </div>
           </ContentCard>
           <ContentCard>
