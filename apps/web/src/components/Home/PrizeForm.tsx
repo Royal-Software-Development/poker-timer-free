@@ -9,13 +9,9 @@ const PrizeForm = () => {
         <h4 className="font-bold text-base">Prize</h4>
         <IconButton variant="neutral" icon={<PlusCircle size={30} color="black" />} />
       </div>
-      <FormField variant="value" label="1" />
-      <FormField variant="value" label="2" />
-      <FormField variant="value" label="3" />
-      <FormField variant="value" label="4" />
-      <FormField variant="value" label="5" />
-      <FormField variant="value" label="6" />
-      <FormField variant="value" label="7" />
+      <FormField variant="value" label="1º" />
+      <FormField variant="value" label="2º" />
+      <FormField variant="value" label="3º" />
     </section>
   )
 }
