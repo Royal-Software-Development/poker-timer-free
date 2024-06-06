@@ -4,14 +4,14 @@ import IconButton from "./IconButton";
 import { cn } from "../../lib/cn";
 import { ChangeEvent } from "react";
 
-const CounterField = ({ label, value, onChange, ...props }: FieldProps) => {
+const CounterField = ({ label, value, onChange = () => { }, ...props }: FieldProps) => {
   const handleIncrement = () => {
-    onChange({ target: { value: (Number(value) + 1).toString() } } as ChangeEvent<HTMLInputElement>);
+    onChange({ target: { value: Math.max(Number(value) - 1, 0).toString() } } as ChangeEvent<HTMLInputElement>);
   };
 
   const handleDecrement = () => {
     if (Number(value) > 0) {
-      onChange({ target: { value: (Number(value) - 1).toString() } } as ChangeEvent<HTMLInputElement>);
+      onChange({ target: { value: Math.max(Number(value) - 1, 0).toString() } } as ChangeEvent<HTMLInputElement>);
     }
   };
 
