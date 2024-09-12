@@ -6,7 +6,7 @@ const Header = () => {
   const { pathname } = useLocation();
 
   return (
-    <header className="bg-neutral-950 px-28 py-1">
+    <header className="bg-neutral-950 px-28 py-1 sticky top-0">
       {pathname === "/timer" ? <TimerHeaderContent /> : <HomeHeaderContent />}
     </header>
   );

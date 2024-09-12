@@ -2,7 +2,7 @@ import { cn } from "../../lib/cn";
 import React, { ReactNode } from "react";
 
 interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant: "green" | "red" | "neutral";
+  variant: Variant;
   icon: ReactNode
 }
 
