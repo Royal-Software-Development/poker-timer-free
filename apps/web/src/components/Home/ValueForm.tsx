@@ -17,7 +17,7 @@ import { ChangeEvent, useCallback } from "react";
 import { ensureNonNegativeValue } from "@poker-time/utils/number";
 
 interface ActionChipsFieldProps {
-  label: string;
+  label?: string | undefined;
   chips: number;
   value: number;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;

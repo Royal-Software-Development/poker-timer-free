@@ -1,7 +1,7 @@
 import { cn } from "../../lib/cn"
 import { FieldProps } from "../../types/field"
 
-const ChipsField = ({ label, value, placeholder, ...props }: FieldProps) => {
+const ChipsField = ({ value, placeholder, ...props }: FieldProps) => {
   return (
     <input
       value={value === 0 ? "" : value}
