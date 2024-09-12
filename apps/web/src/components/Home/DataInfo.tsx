@@ -15,7 +15,6 @@ const DataInfo = () => {
         <div className="flex flex-col gap-6 max-w-[650px] w-full">
           <PlayersInForm />
           <PrizeForm />
-
         </div>
       </section>
     </main>

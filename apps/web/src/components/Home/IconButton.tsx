@@ -1,8 +1,6 @@
 import { cn } from "../../lib/cn";
 import React, { ReactNode } from "react";
 
-type Variant = "green" | "red" | "neutral"
-
 interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant: Variant;
   icon: ReactNode
